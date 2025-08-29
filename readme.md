@@ -20,24 +20,24 @@ pip install -r requirements.txt
 ```
 
 ---
-
 ## 📸 Outputs
 
-* **Assignment 1a – Student Marks**
+### Assignment 1a – Student Marks
+- `outputs/results_task1a.xlsx` with 2 sheets (Summary + Top Performers) and embedded **bar chart**  
+![Assignment 1a](outputs/results_task1a.png)
 
-  * `outputs/results_task1a.xlsx` with 2 sheets (Summary + Top Performers) and embedded **bar chart**
-  * 
+### Assignment 1b – Polygon Geometry
+- `outputs/polygon_plot_task1b.png` — filled polygon with vertex labels, centroid (red), interior angle annotations  
+![Assignment 1b](outputs/polygon_plot_task1b.png)
 
-* **Assignment 1b – Polygon Geometry**
+### Assignment 2 – Room Tiling
+- `outputs/tiling_roomtask2.png` — spiral tiling visualization, colored by tile size (1×1 red, 2×2 blue, 3×3 yellow, 4×4 green)  
+![Assignment 2](outputs/tiling_roomtask2.png)
 
-  * `outputs/polygon_plot_task1b.png` — filled polygon with vertex labels, centroid (red), interior angle annotations
+### Assignment 3 – Triangle Pyramid
+- `outputs/triangle_pyramidtask3.png` — pyramid of alternating upright/inverted triangles  
+![Assignment 3](outputs/triangle_pyramidtask3.png)
 
-* **Assignment 2 – Room Tiling**
-
-  * `outputs/tiling_roomtask2.png` — spiral tiling visualization, colored by tile size (1×1 red, 2×2 blue, 3×3 yellow, 4×4 green)
-
-* **Assignment 3 – Triangle Pyramid**
-
-  * `outputs/triangle_pyramidtask3.png` — pyramid of alternating upright/inverted triangles
+---
 
 All outputs are saved in the `outputs/` directory.
