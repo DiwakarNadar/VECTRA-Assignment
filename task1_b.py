@@ -2,9 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from shapely.geometry import Polygon, Point
 
-# ------------------------------
+
 # Input Polygon Vertices
-# ------------------------------
 vertices = np.array([
     (9.05, 7.76),
     (12.5, 3.0),
@@ -17,18 +16,16 @@ vertices = np.array([
 poly = Polygon(vertices)
 n = len(vertices)
 
-# ------------------------------
 # 1. Represent polygon edges as vectors
-# ------------------------------
+
 edges = []
 for i in range(n):
     p1, p2 = vertices[i], vertices[(i+1) % n]
     edges.append(p2 - p1)   # vector from p1 to p2
 edges = np.array(edges)
 
-# ------------------------------
+
 # 2. Area using shoelace formula
-# ------------------------------
 def shoelace_area(verts):
     x = verts[:,0]
     y = verts[:,1]
@@ -37,14 +34,14 @@ def shoelace_area(verts):
 area_calc = shoelace_area(vertices)
 area_shapely = poly.area
 
-# ------------------------------
+
 # 3. Edge lengths using vector norms
-# ------------------------------
+
 edge_lengths = np.linalg.norm(edges, axis=1)
 
-# ------------------------------
+
 # 4. Interior angles using dot product
-# ------------------------------
+
 angles = []
 is_convex = True
 for i in range(n):
@@ -65,15 +62,15 @@ for i in range(n):
 
     angles.append(round(theta, 2))
 
-# ------------------------------
+
 # 5. Centroid
-# ------------------------------
+
 centroid_calc = vertices.mean(axis=0)
 centroid_shapely = (poly.centroid.x, poly.centroid.y)
 
-# ------------------------------
+
 # Print Results
-# ------------------------------
+
 print("Polygon Area (Shoelace):", round(area_calc, 2))
 print("Polygon Area (Shapely):", round(area_shapely, 2))
 print("Edge Lengths:", np.round(edge_lengths, 2).tolist())
@@ -82,9 +79,9 @@ print("Is Convex:", is_convex)
 print("Centroid (Average):", np.round(centroid_calc, 2).tolist())
 print("Centroid (Shapely):", (round(centroid_shapely[0], 2), round(centroid_shapely[1], 2)))
 
-# ------------------------------
+
 # 6. Visualization
-# ------------------------------
+
 plt.figure(figsize=(6,6))
 x, y = vertices[:,0], vertices[:,1]
 

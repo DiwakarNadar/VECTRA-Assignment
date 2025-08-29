@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-# Step 0: Create student data and save
+# Step 1: Creating student data
 students = {
     "ID": [101, 102, 103, 104, 105, 106, 107],
     "Name": ["Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace"],
@@ -12,26 +12,32 @@ students = {
 }
 
 df = pd.DataFrame(students)
+
+# Step 2: Creating a excel file of the student data
 df.to_excel("student.xlsx", index=False)
 
-# Step 1: Read data
+# Step 3: Reading the student data from the excel file
 df = pd.read_excel("student.xlsx")
 
-# Step 2: Compute total, average, grade
+# Step 4: Computing total, average, grade
 subs = ["Math", "Physics", "Chemistry", "Biology"]
 
 df["Total"] = df[subs].sum(axis=1)
 df["Avg"] = df[subs].mean(axis=1)
 
-conds = [
-    df["Avg"] >= 90,
-    df["Avg"] >= 75,
-    df["Avg"] >= 60
-]
-grades = ["A", "B", "C"]
-df["Grade"] = np.select(conds, grades, default="F")
+def get_grade(avg):
+    if avg >= 90:
+        return "A"
+    elif avg >= 75:
+        return "B"
+    elif avg >= 60:
+        return "C"
+    else:
+        return "F"
 
-# Step 3: Top 3 in each subject
+df["Grade"] = df["Average"].apply(get_grade)
+
+# Step 6: Calculating Top 3 in each subject
 top_rows = []
 for sub in subs:
     top3 = df.nlargest(3, sub)[["ID", "Name", sub]].copy()
@@ -42,7 +48,7 @@ for sub in subs:
 top_df = pd.concat(top_rows, ignore_index=True)
 top_df = top_df[["Subject", "ID", "Name", "Marks"]]
 
-# Step 4: Subject averages
+# Step 7: Subject averages
 avg_marks = df[subs].mean()
 
 # Step 5: Save everything to Excel
@@ -67,5 +73,3 @@ with pd.ExcelWriter("results.xlsx", engine="xlsxwriter") as writer:
     chart.set_x_axis({"name": "Subjects"})
     chart.set_y_axis({"name": "Average Marks"})
     sheet.insert_chart("D2", chart)
-
-print("✅ results.xlsx created!")
