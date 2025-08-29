@@ -1,17 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# ------------------------------
+
 # Input: Room dimensions
-# ------------------------------
+
 M, N = 12, 10   # Width × Height
 
 tile_sizes = [4, 3, 2, 1]  # Bigger first
 colors = {1: "red", 2: "blue", 3: "yellow", 4: "green"}
 
-# ------------------------------
 # Spiral Traversal Generator
-# ------------------------------
+
 def spiral_coords(M, N):
     """Generate exactly M*N coordinates in spiral order (center first)."""
     x, y = M // 2, N // 2
@@ -33,9 +32,9 @@ def spiral_coords(M, N):
             dx, dy = -dy, dx   # Rotate direction
         steps += 1
 
-# ------------------------------
+
 # Check + Place Tile
-# ------------------------------
+
 def can_place(board, x, y, size):
     """Check if a size×size tile fits at (x,y)."""
     if x + size > M or y + size > N:
@@ -45,9 +44,7 @@ def can_place(board, x, y, size):
 def place_tile(board, x, y, size, tile_id):
     board[y:y+size, x:x+size] = tile_id
 
-# ------------------------------
 # Fill the room
-# ------------------------------
 board = np.zeros((N, M), dtype=int)
 tile_count = {s:0 for s in tile_sizes}
 placed_tiles = []   # keep track of (x,y,size,color)
@@ -64,9 +61,7 @@ for (cx, cy) in spiral_coords(M, N):
             tile_id += 1
             break
 
-# ------------------------------
 # Visualization
-# ------------------------------
 fig, ax = plt.subplots(figsize=(6,6))
 for (x, y, size, color) in placed_tiles:
     # Draw square tile (y flipped for matplotlib coord system)
@@ -83,9 +78,7 @@ plt.title(f"Room Tiling {M}x{N}")
 
 plt.show()
 
-# ------------------------------
 # Print Results
-# ------------------------------
 print("Tile usage:")
 for s in tile_sizes:
     print(f"{s}x{s} tiles: {tile_count[s]}")

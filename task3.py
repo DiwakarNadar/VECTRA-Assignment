@@ -16,7 +16,7 @@ def draw_perfect_pyramid(depth=4, size=1.0):
     ax.axis('off')
 
     h = np.sqrt(3)/2 * size
-    vertical_step = h # tweak this to avoid overlap or gaps
+    vertical_step = h
 
     for row in range(depth):
         num_pairs = row + 1
